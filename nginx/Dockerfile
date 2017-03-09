@@ -1,5 +1,5 @@
-FROM nginx:latest
+FROM nginx
 
-ADD ./default.conf /etc/nginx/conf.d/
+ADD ./vhost.conf /etc/nginx/conf.d/default.conf
 
-CMD service nginx restart
+WORKDIR /var/www

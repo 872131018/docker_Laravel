@@ -1,25 +1,27 @@
 version: "2"
 services:
-  nginx:
-      build:
-          context: ./nginx
-      ports:
-          - "8080:80"
-      volumes:
-          - ./src:/var/www/html
-  fpm:
-      build:
-          context: ./fpm
-      expose:
-          - "9000"
-      volumes:
-          - ./src:/var/www/html
-      environment:
-          - "DB_HOST=db"
-          - "DB_DATABASE=laravel"
-  db:
-      build:
-          context: ./db
-      environment:
-          - MYSQL_ROOT_PASSWORD=root
-          - MYSQL_DATABASE=laravel
+    nginx:
+        build:
+            context: ./nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./src:/var/www
+        links:
+            - fpm
+    fpm:
+        build:
+            context: ./fpm
+        expose:
+            - "9000"
+        volumes:
+            - ./src:/var/www
+        environment:
+            - "DB_HOST=db"
+            - "DB_DATABASE=laravel"
+#    db:
+#        build:
+#            context: ./db
+#        environment:
+#            - MYSQL_ROOT_PASSWORD=root
+#            - MYSQL_DATABASE=laravel
