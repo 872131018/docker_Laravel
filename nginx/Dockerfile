@@ -1,5 +1,11 @@
 FROM nginx
 
-ADD ./vhost.conf /etc/nginx/conf.d/default.conf
+ADD ./fastcgi-php.conf /etc/nginx/fastcgi-php.conf
 
-WORKDIR /var/www
+ADD ./default.conf /etc/nginx/conf.d/default.conf
+
+ADD ./fastcgi.conf /etc/nginx/fastcgi.conf
+
+ADD ./nginx.conf /etc/nginx/nginx.conf
+
+CMD service nginx restart
